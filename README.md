@@ -79,7 +79,7 @@ services:
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
       - SE_NODE_MAX_SESSIONS=4
   vendor-portal:
-    image: yehorychev/selenium-docker
+    image: yehory/selenium-docker
     depends_on:
       - chrome
     environment:
@@ -90,7 +90,7 @@ services:
     volumes:
       - ./output/vendor-portal:/home/selenium-docker/test-output
   flight-reservation:
-    image: yehorychev/selenium-docker
+    image: yehory/selenium-docker
     depends_on:
       - firefox
     environment:
