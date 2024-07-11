@@ -5,7 +5,9 @@ This repository contains the configuration and scripts necessary to run a Seleni
 ## Repository Structure
 
 - `Jenkinsfile`: Defines the Jenkins pipeline stages for running and bringing down the Selenium Grid using Docker Compose.
-- `docker-compose.yml`: Defines the services for the Selenium Grid Hub, Chrome and Firefox nodes, and the test services.
+- `test-suites.yml`: Defines the test-suites for the Selenium Grid Hub.
+- `grid.yml`: Defines the services for the Selenium Grid Hub, Chrome and Firefox nodes, and the test services.
+- `.env`: Defines the Selenium Grid environment
 - `runner.sh`: A shell script executed by the Docker containers to run the tests.
 
 ## Getting Started
