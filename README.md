@@ -28,12 +28,14 @@ This repository contains the configuration and scripts necessary to run a Seleni
 
 3. Run the Docker Compose to start the Selenium Grid and the test services:
     ```sh
-    docker-compose up
+    docker-compose -f grid.yml up -d
+    docker-compose -f test-suites.yml up
     ```
 
 4. After the tests have completed, bring down the Selenium Grid:
     ```sh
-    docker-compose down
+    docker-compose -f grid.yml down
+    docker-compose -f test-suites.yml down
     ```
 
 ### Jenkins Integration
@@ -49,39 +51,13 @@ The `docker-compose.yml` file defines the following services:
 - `vendor-portal`: The test service for the Vendor Portal tests.
 - `flight-reservation`: The test service for the Flight Reservation tests.
 
-### Docker Compose File
+### Test-Suites | Docker Compose File
 
 ```yaml
 version: "3"
 services:
-  hub:
-    image: seleniarm/hub:4.16
-  chrome:
-    image: seleniarm/node-chromium:4.16
-    shm_size: '2g'
-    depends_on:
-      - hub
-    environment:
-      - SE_EVENT_BUS_HOST=hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
-      - SE_NODE_MAX_SESSIONS=4
-  firefox:
-    image: seleniarm/node-firefox:4.16
-    shm_size: '2g'
-    depends_on:
-      - hub
-    environment:
-      - SE_EVENT_BUS_HOST=hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
-      - SE_NODE_MAX_SESSIONS=4
   vendor-portal:
     image: yehory/selenium-docker
-    depends_on:
-      - chrome
     environment:
       - BROWSER=chrome
       - HUB_HOST=hub
@@ -91,8 +67,6 @@ services:
       - ./output/vendor-portal:/home/selenium-docker/test-output
   flight-reservation:
     image: yehory/selenium-docker
-    depends_on:
-      - firefox
     environment:
       - BROWSER=firefox
       - HUB_HOST=hub
