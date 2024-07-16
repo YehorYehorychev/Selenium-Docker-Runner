@@ -16,7 +16,7 @@ pipeline {
             steps {
                 bat "docker-compose -f test-suites.yml up --pull=always" // For Linux/Mac use -> sh "docker-compose -f test-suites.yml up"
                 script {
-                    if (fileExists('output/vendor-portal/testng-failed.xml') || ('output/flight-reservation/testng-failed.xml')) {
+                    if (fileExists('output/vendor-portal/testng-failed.xml') || fileExists('output/vendor-portal/testng-failed.xml')) {
                         error('Failed Tests Found!')
                     }
                 }
