@@ -9,6 +9,8 @@ This repository contains the configuration and scripts necessary to run a Seleni
 - `grid.yml`: Defines the services for the Selenium Grid Hub, Chrome and Firefox nodes, and the test services.
 - `.env`: Defines the Selenium Grid environment
 - `runner.sh`: A shell script executed by the Docker containers to run the tests.
+- `AWS`: If you want to connect to an AWS node and run your tests using AWS, use the aws folder in this repository.
+
 
 ## Getting Started
 
